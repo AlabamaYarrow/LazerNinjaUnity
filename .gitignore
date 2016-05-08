@@ -1,5 +1,6 @@
 *.apk
 *.csproj
+*.userprefs
 *.sln
 Temp/
 Library/
