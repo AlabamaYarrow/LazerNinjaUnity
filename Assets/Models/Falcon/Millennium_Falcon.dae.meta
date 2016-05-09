@@ -1,0 +1,94 @@
+fileFormatVersion: 2
+guid: 978801a1e63ffac409d49cfe82bbf622
+timeCreated: 1462812725
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: antenna_1
+    100002: antenna_2
+    100004: Armature
+    100006: gun_bottom_1
+    100008: gun_bottom_2
+    100010: gun_top_1
+    100012: gun_top_2
+    100014: //RootNode
+    100016: Millennium_Falcon
+    100018: MillenniumFalconBottom
+    100020: MillenniumFalconTop
+    100022: root_ground
+    400000: antenna_1
+    400002: antenna_2
+    400004: Armature
+    400006: gun_bottom_1
+    400008: gun_bottom_2
+    400010: gun_top_1
+    400012: gun_top_2
+    400014: //RootNode
+    400016: Millennium_Falcon
+    400018: MillenniumFalconBottom
+    400020: MillenniumFalconTop
+    400022: root_ground
+    4300000: MillenniumFalconBottom
+    4300002: MillenniumFalconTop
+    9500000: //RootNode
+    13700000: MillenniumFalconBottom
+    13700002: MillenniumFalconTop
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
