@@ -26,6 +26,6 @@ public class Shoot : MonoBehaviour {
 		Vector3 position = transform.position;
 		position.y = position.y + verticalOffset;
 		Rigidbody instanceBullet = (Rigidbody) Instantiate (Bullet, position, ShootPosition.rotation);
-		instanceBullet.GetComponent<Rigidbody>().AddForce (ShootPosition.forward * ShootForce);
+		instanceBullet.GetComponent<Rigidbody> ().AddForce (ShootPosition.forward * ShootForce);
 	}	
 }
