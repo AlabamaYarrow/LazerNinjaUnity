@@ -20,22 +20,16 @@ public class NetworkMngr : MonoBehaviour {
 
 	public bool isAtStartup = true;
 
-	
+	void Start () {
+		Input.gyro.enabled = true;
+		Input.gyro.updateInterval = 0.01F;
+	}
 	void Update () 
 	{
-		if (isAtStartup)
-		{
-			if (Input.GetKeyDown(KeyCode.S))
-			{
-				SetupServer();
-			}
-			
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				SetupClient();
-			}
+		if (!isAtStartup) {
+			toEdit = Input.gyro.attitude.ToString();
+
 		}
-//		toEdit = NetworkServer.connections.Count.ToString();
 	}
 	
 	void OnGUI()
@@ -43,9 +37,14 @@ public class NetworkMngr : MonoBehaviour {
 		GUI.Label (new Rect (2, 70, 200, 200), toEdit);
 		if (isAtStartup)
 		{
-			GUI.Label(new Rect(2, 10, 150, 100), "Press S for server");     
-			GUI.Label(new Rect(2, 30, 150, 100), "Press B for both");       
-			GUI.Label(new Rect(2, 50, 150, 100), "Press C for client");
+			IP = GUI.TextField(new Rect(2, 30, 150, 30), IP);
+			PORT = GUI.TextField(new Rect(2, 70, 150, 30), PORT);
+			if (GUI.Button(new Rect(2,10, 150, 15), "start server")) {
+				SetupServer();
+			}
+			if (GUI.Button(new Rect(2, 110, 150, 15), "start client")) {
+				SetupClient();
+			}
 		}
 
 	}   
