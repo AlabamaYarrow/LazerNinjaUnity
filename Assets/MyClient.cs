@@ -15,17 +15,23 @@ public class MyClient : MonoBehaviour {
 		}
 		myClient = new NetworkClient();
 		myClient.RegisterHandler(MsgType.Connect, OnConnected);     
+		myClient.RegisterHandler (NetworkMngr.toClient, OnGyro);
 		myClient.Connect(NetworkMngr.IP, int.Parse(NetworkMngr.PORT));
 		DontDestroyOnLoad (gameObject);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		x = x + 1;
-		var msg = new NetworkMngr.GyroPosition();
-		msg.x = x;
-		myClient.Send (NetworkMngr.fromClient, msg);
+//		x = x + 1;
+//		var msg = new NetworkMngr.GyroPosition();
+//		msg.x = x;
+//		myClient.Send (NetworkMngr.fromClient, msg);
 //		Debug.Log (msg);
+	}
+
+	private void OnGyro(NetworkMessage netMsg) {
+		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
+		transform.rotation = msg.gyro;
 	}
 
 	public void OnConnected(NetworkMessage netMsg)

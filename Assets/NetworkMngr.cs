@@ -5,14 +5,14 @@ using UnityEngine.Networking;
 public class NetworkMngr : MonoBehaviour {
 
 	public class GyroPosition : MessageBase {
-		public int x;
+		public Quaternion gyro;
 	}
 
 	public const short toClient = 160;
 	public static short fromClient = 150;
 	
 	public static string IP = "127.0.0.1";
-	public static string PORT = "1488";
+	public static string PORT = "1188";
 
 
 
@@ -28,7 +28,7 @@ public class NetworkMngr : MonoBehaviour {
 	{
 		if (!isAtStartup) {
 			toEdit = Input.gyro.attitude.ToString();
-
+			sendGyro();
 		}
 	}
 	
@@ -37,12 +37,12 @@ public class NetworkMngr : MonoBehaviour {
 		GUI.Label (new Rect (2, 70, 200, 200), toEdit);
 		if (isAtStartup)
 		{
-			IP = GUI.TextField(new Rect(2, 30, 150, 30), IP);
-			PORT = GUI.TextField(new Rect(2, 70, 150, 30), PORT);
-			if (GUI.Button(new Rect(2,10, 150, 15), "start server")) {
+			IP = GUI.TextField(new Rect(2, 60, 150, 30), IP);
+			PORT = GUI.TextField(new Rect(2, 100, 150, 30), PORT);
+			if (GUI.Button(new Rect(2,10, 150, 40), "start server")) {
 				SetupServer();
 			}
-			if (GUI.Button(new Rect(2, 110, 150, 15), "start client")) {
+			if (GUI.Button(new Rect(2, 140, 150, 40), "start client")) {
 				SetupClient();
 			}
 		}
@@ -62,10 +62,16 @@ public class NetworkMngr : MonoBehaviour {
 		Application.LoadLevel (1);
 	}	
 
+	private void sendGyro() {
+		var msg = new GyroPosition ();
+		msg.gyro = Input.gyro.attitude;
+		NetworkServer.SendToAll (toClient, msg);
+	}
+
 	private void onGyroMessage(NetworkMessage netMsg){
 		Debug.Log ("gyroMessage");
-		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
-		toEdit = msg.x.ToString ();
+//		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
+//		toEdit = msg.x.ToString ();
 	}
 
 }
