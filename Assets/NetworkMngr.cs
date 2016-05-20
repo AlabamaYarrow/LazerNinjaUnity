@@ -21,6 +21,7 @@ public class NetworkMngr : MonoBehaviour {
 	public bool isAtStartup = true;
 
 	void Start () {
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		Input.gyro.enabled = true;
 		Input.gyro.updateInterval = 0.01F;
 	}
@@ -48,8 +49,7 @@ public class NetworkMngr : MonoBehaviour {
 
 	}   
 	// Create a server and listen on a port
-	public void SetupServer()
-	{
+	public void SetupServer(){
 		NetworkServer.Listen(int.Parse(PORT));
 		NetworkServer.RegisterHandler(fromClient, onGyroMessage);
 		isAtStartup = false;

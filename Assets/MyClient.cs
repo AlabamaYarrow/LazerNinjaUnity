@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class MyClient : MonoBehaviour {
 	NetworkClient myClient;
-
 	private int x;
 	// Use this for initialization
 	void Start () {
@@ -31,7 +30,8 @@ public class MyClient : MonoBehaviour {
 
 	private void OnGyro(NetworkMessage netMsg) {
 		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
-		transform.rotation = msg.gyro;
+		transform.localRotation = (Quaternion) msg.gyro;
+		Debug.Log(transform.position);
 	}
 
 	public void OnConnected(NetworkMessage netMsg)

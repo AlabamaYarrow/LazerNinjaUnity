@@ -193,15 +193,15 @@ public class NetworkMasterServer : MonoBehaviour
 	{
 		if (NetworkServer.active)
 		{
-			GUI.Label(new Rect(400, 0, 200, 20), "Online port:" + MasterServerPort);
-			if (GUI.Button(new Rect(400, 20, 200, 20), "Reset  Master Server"))
+			GUI.Label(new Rect(400, 0, 800, 80), "Online port:" + MasterServerPort);
+			if (GUI.Button(new Rect(1000, 80, 800, 80), "Reset  Master Server"))
 			{
 				ResetServer();
 			}
 		}
 		else
 		{
-			if (GUI.Button(new Rect(400, 20, 200, 20), "Init Master Server"))
+			if (GUI.Button(new Rect(400, 80, 800, 80), "Init Master Server"))
 			{
 				InitializeServer();
 			}
@@ -210,11 +210,11 @@ public class NetworkMasterServer : MonoBehaviour
 		int y = 100;
 		foreach (var rooms in gameTypeRooms.Values)
 		{
-			GUI.Label(new Rect(400, y, 200, 20), "GameType:" + rooms.name);
+			GUI.Label(new Rect(400, y, 800, 80), "GameType:" + rooms.name);
 			y += 22;
 			foreach (var room in rooms.rooms.Values)
 			{
-				GUI.Label(new Rect(420, y, 200, 20), "Game:" + room.name + " addr:" + room.hostIp + ":" + room.hostPort);
+				GUI.Label(new Rect(480, y, 800, 80), "Game:" + room.name + " addr:" + room.hostIp + ":" + room.hostPort);
 				y += 22;
 			}
 		}
