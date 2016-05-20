@@ -34,15 +34,14 @@ public class NetworkMngr : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		GUI.Label (new Rect (2, 70, 200, 200), toEdit);
-		if (isAtStartup)
-		{
-			IP = GUI.TextField(new Rect(2, 60, 150, 30), IP);
-			PORT = GUI.TextField(new Rect(2, 100, 150, 30), PORT);
-			if (GUI.Button(new Rect(2,10, 150, 40), "start server")) {
+		GUI.Label (new Rect (2, 70, 500, 500), toEdit);
+		if (isAtStartup) {
+			IP = GUI.TextField(new Rect(2, 200, 450, 90), IP);
+			PORT = GUI.TextField(new Rect(2, 300, 450, 90), PORT);
+			if (GUI.Button(new Rect(2,40, 450, 120), "start server")) {
 				SetupServer();
 			}
-			if (GUI.Button(new Rect(2, 140, 150, 40), "start client")) {
+			if (GUI.Button(new Rect(2, 350, 450, 120), "start client")) {
 				SetupClient();
 			}
 		}
