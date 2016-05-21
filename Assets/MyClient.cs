@@ -30,8 +30,26 @@ public class MyClient : MonoBehaviour {
 
 	private void OnGyro(NetworkMessage netMsg) {
 		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
-		transform.localRotation = (Quaternion) msg.gyro;
-		Debug.Log(transform.position);
+
+		Quaternion transQuat = Quaternion.identity; //Adjust Unity output quaternion as per android SensorManager 
+		transQuat.w = msg.gyro.x; 
+		transQuat.x = msg.gyro.y; 
+		transQuat.y = msg.gyro.z; 
+		transQuat.z = msg.gyro.w; 
+		transQuat = Quaternion.Euler(90, 90, 0)*transQuat;//change axis around 
+
+		Quaternion q = Quaternion.Euler (msg.gyro.eulerAngles.y, msg.gyro.eulerAngles.z, -msg.gyro.eulerAngles.x);
+		q = Quaternion.Euler (0, -90, 0) * q;
+
+		q = Quaternion.Euler (0, 0, 90) * q;
+
+		//q.eulerAngles.x = msg.gyro.eulerAngles.y;
+		//q.eulerAngles.y = msg.gyro.eulerAngles.z;
+		//q.eulerAngles.z = msg.gyro.eulerAngles.x;
+
+
+		transform.localRotation = q;//transQuat;//msg.gyro;//transQuat;
+		Debug.Log("X: " + msg.gyro.eulerAngles.x + " Y: " + msg.gyro.eulerAngles.y + " z: " + msg.gyro.eulerAngles.z);
 	}
 
 	public void OnConnected(NetworkMessage netMsg)
