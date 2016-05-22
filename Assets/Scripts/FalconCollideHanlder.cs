@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FalconCollideHanlder : MonoBehaviour {
 
-	public GameObject PlayerManager;
+	GameObject PlayerManager;
 
 	void Start () {
 		PlayerManager = GameObject.Find("PlayerManager");
