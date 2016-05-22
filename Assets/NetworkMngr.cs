@@ -58,7 +58,7 @@ public class NetworkMngr : MonoBehaviour {
 	// Create a client and connect to the server port
 	public void SetupClient()
 	{
-		Application.LoadLevel (1);
+		Application.LoadLevel (2);
 	}	
 
 	private void sendGyro() {
