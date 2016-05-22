@@ -36,12 +36,16 @@ public class MyClient : MonoBehaviour {
 		transQuat.x = msg.gyro.y; 
 		transQuat.y = msg.gyro.z; 
 		transQuat.z = msg.gyro.w; 
-		transQuat = Quaternion.Euler(90, 90, 0)*transQuat;//change axis around 
+
+		transQuat = transQuat * Quaternion.Euler(0, 0, -90);//change axis around 
+		transQuat = transQuat * Quaternion.Euler(90, 0, 0);
 
 		Quaternion q = Quaternion.Euler (msg.gyro.eulerAngles.y, msg.gyro.eulerAngles.z, -msg.gyro.eulerAngles.x);
-		q = Quaternion.Euler (0, -90, 0) * q;
+		//Quaternion q = Quaternion.Euler (-msg.gyro.eulerAngles.y, msg.gyro.eulerAngles.z, msg.gyro.eulerAngles.x);
+		//q = Quaternion.Euler (0, 0, -90) * q;
 
-		q = Quaternion.Euler (0, 0, 90) * q;
+		q = Quaternion.Euler (0, -90, 0) * q;
+		//q = q * Quaternion.Euler (0, 0, 90);
 
 		//q.eulerAngles.x = msg.gyro.eulerAngles.y;
 		//q.eulerAngles.y = msg.gyro.eulerAngles.z;
@@ -49,7 +53,7 @@ public class MyClient : MonoBehaviour {
 
 
 		transform.localRotation = q;//transQuat;//msg.gyro;//transQuat;
-		Debug.Log("X: " + msg.gyro.eulerAngles.x + " Y: " + msg.gyro.eulerAngles.y + " z: " + msg.gyro.eulerAngles.z);
+		Debug.Log("X: " + transQuat.eulerAngles.x + " Y: " + transQuat.eulerAngles.y + " z: " + transQuat .eulerAngles.z);
 	}
 
 	public void OnConnected(NetworkMessage netMsg)
