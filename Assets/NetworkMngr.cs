@@ -11,7 +11,7 @@ public class NetworkMngr : MonoBehaviour {
 	public const short toClient = 160;
 	public static short fromClient = 150;
 	
-	public static string IP = "127.0.0.1";
+	public static string IP = Network.player.ipAddress;
 	public static string PORT = "1188";
 
 
