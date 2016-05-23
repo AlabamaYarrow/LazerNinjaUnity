@@ -62,6 +62,7 @@ public class RadialCutoutMenu : MonoBehaviour {
 
 	public void callLog(){
 		Debug.Log("BUTTON HAS BEEN SELECTED!");
+		Application.LoadLevel (1);
 	}
 
 	// Google Cardboard Gaze
