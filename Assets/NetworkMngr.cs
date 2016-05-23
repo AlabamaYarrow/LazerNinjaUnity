@@ -16,36 +16,38 @@ public class NetworkMngr : MonoBehaviour {
 
 
 
-	public string toEdit;
+	public InstantGuiInputText IPText;
 
 	public bool isAtStartup = true;
 
 	void Start () {
+		IPText.text = IP;
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		Input.gyro.enabled = true;
 		Input.gyro.updateInterval = 0.01F;
+		SetupServer();
 	}
 	void Update () 
 	{
 		if (!isAtStartup) {
-			toEdit = Input.gyro.attitude.ToString();
+
 			sendGyro();
 		}
 	}
 	
 	void OnGUI()
 	{
-		GUI.Label (new Rect (2, 70, 500, 500), toEdit);
-		if (isAtStartup) {
-			IP = GUI.TextField(new Rect(2, 200, 450, 90), IP);
-			PORT = GUI.TextField(new Rect(2, 300, 450, 90), PORT);
-			if (GUI.Button(new Rect(2,40, 450, 120), "start server")) {
-				SetupServer();
-			}
-			if (GUI.Button(new Rect(2, 350, 450, 120), "start client")) {
-				SetupClient();
-			}
-		}
+//		GUI.Label (new Rect (2, 70, 500, 500), toEdit);
+//		if (isAtStartup) {
+//			IP = GUI.TextField(new Rect(2, 200, 450, 90), IP);
+//			PORT = GUI.TextField(new Rect(2, 300, 450, 90), PORT);
+//			if (GUI.Button(new Rect(2,40, 450, 120), "start server")) {
+		//				SetupServer();
+//			}
+//			if (GUI.Button(new Rect(2, 350, 450, 120), "start client")) {
+//				SetupClient();
+//			}
+//		}
 
 	}   
 	// Create a server and listen on a port
