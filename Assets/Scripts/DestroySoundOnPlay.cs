@@ -8,7 +8,7 @@ public class DestroySoundOnPlay : MonoBehaviour {
 	void Start () {
 		var sound = this.GetComponent<AudioSource> ();
 		totalTimeBeforeDestroy = sound.clip.length;
-	}	
+	}
 
 	void Update () {
 		totalTimeBeforeDestroy -= Time.deltaTime;
