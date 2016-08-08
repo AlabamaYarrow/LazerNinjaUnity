@@ -6,9 +6,13 @@ public class GameoverText : MonoBehaviour {
 
 	public Text text;
 
+	private Color TextColor;
+
 	// Use this for initialization
 	void Start () {
 		text.color = Color.clear;
+		TextColor = new Color();
+		Color.TryParseHexString("#C2C2C2FF", out TextColor);
 	}
 	
 	// Update is called once per frame
@@ -16,8 +20,8 @@ public class GameoverText : MonoBehaviour {
 	
 	}
 
-	public void Appear () {
-		text.color = Color.red;
+	public void Appear () {		
+		text.color = TextColor;
 	}
 }
 		                       
