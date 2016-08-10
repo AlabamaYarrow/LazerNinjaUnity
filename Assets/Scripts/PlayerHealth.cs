@@ -22,8 +22,8 @@ public class PlayerHealth : MonoBehaviour {
 		health = 100;
 		GameoverTextLeft = GameObject.Find("GameOverTextLeft");
 
-		TimerEndColor = new Color();
-		Color.TryParseHexString("#E8A000FF", out TimerEndColor);
+		TimerEndColor = new Color(0.9f, 0.625f, 0f, 1f);
+//		Color.TryParseHexString("#E8A000FF", out TimerEndColor);
 
 	}
 
