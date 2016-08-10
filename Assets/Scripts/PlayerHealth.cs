@@ -6,7 +6,8 @@ public class PlayerHealth : MonoBehaviour {
 	public static int health = 100;
 	public Slider HealthBar;
 	public Text HealthText;
-	public Text TimerText;
+	public Text TimerText;	
+	public AudioSource GameOverSound;
 	public int decreaseSpeed = 1;
 	public int GameOverDelay = 2;
 
@@ -14,6 +15,7 @@ public class PlayerHealth : MonoBehaviour {
 	private Color TimerEndColor;
 
 	private bool TimerCountAllowed = true;
+	private bool finishing = false;
 
 	GameObject GameoverTextLeft;
 	GameObject GameoverTextRight;
@@ -51,7 +53,9 @@ public class PlayerHealth : MonoBehaviour {
 
 	public void DecreaseHealth() 
 	{
-		if (health <= 0) {
+		if (health <= 0 && ! finishing) {
+			finishing = true;
+
 			var gameoverText = GameoverTextLeft.GetComponent<GameoverText> ();
 			gameoverText.Appear ();
 
@@ -59,6 +63,7 @@ public class PlayerHealth : MonoBehaviour {
 			SetHealth ();
 			TimerCountAllowed = false;
 			TimerText.color = TimerEndColor;
+			GameOverSound.Play();
 			StartCoroutine("WaitAndLoadLevel");
 		} else {
 			SetHealth ();
