@@ -17,8 +17,10 @@ public class SaberCollideHanlder : MonoBehaviour {
 			return;
 		}
 		triggered = true;
-		Debug.Log ("Saber Collision Enter");
-		HitSound.Play ();
+		// Debug.Log ("Saber Collision Enter");
+		if (HitSound != null) {
+			HitSound.Play ();
+		}
 	}
 
 	void OnCollisionExit(Collision collision) 
@@ -28,6 +30,6 @@ public class SaberCollideHanlder : MonoBehaviour {
 			return;
 		}
 		triggered = false;
-		Debug.Log ("Saber Collision Exit");
+		// Debug.Log ("Saber Collision Exit");
 	}
 }

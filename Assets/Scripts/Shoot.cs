@@ -24,7 +24,7 @@ public class Shoot : MonoBehaviour {
 	void Start () {
 		StartCoroutine ("WaitAndStartShooting");
 		InvokeRepeating ("DecreaseRate", 1, 1);
-		Debug.Log("Started!");
+		//Debug.Log("Started!");
 
 	}
 
@@ -56,19 +56,19 @@ public class Shoot : MonoBehaviour {
 		Vector3 direction = new Vector3 ();
 		Vector3 zero = new Vector3 (0, playerHeight, 0);
 
-		Vector3 fluctuation = new Vector3 (Random.Range (-0.25f, 0.25f),
+		Vector3 fluctuation = new Vector3 (Random.Range (-0.15f, 0.15f),
 		                                   Random.Range (0, 0.5f),
-		                                   Random.Range (-0.25f, 0.25f));
+		                                   Random.Range (-0.15f, 0.15f));
 
 		zero += fluctuation;
 
-		Debug.Log ("Zero" + zero.ToString ());
-		Debug.Log ("Position" + position.ToString());
+		//Debug.Log ("Zero" + zero.ToString ());
+		//Debug.Log ("Position" + position.ToString());
 		direction = zero - position;
-		Debug.Log ("Direction" + direction.ToString());
+		//Debug.Log ("Direction" + direction.ToString());
 
 		direction = direction.normalized;
-		Debug.Log ("Normalized" + direction.ToString());
+		//Debug.Log ("Normalized" + direction.ToString());
 
 		instanceBullet.GetComponent<Rigidbody> ().AddForce (direction * ShootForce);
 		ShootSound.Play ();
