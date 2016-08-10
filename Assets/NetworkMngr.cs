@@ -14,6 +14,7 @@ public class NetworkMngr : MonoBehaviour {
 	public static string IP = Network.player.ipAddress;
 	public static string PORT = "1188";
 
+	public NetworkDiscovery discovery;
 
 
 	public InstantGuiInputText IPText;
@@ -21,7 +22,7 @@ public class NetworkMngr : MonoBehaviour {
 	public bool isAtStartup = true;
 
 	void Start () {
-		IPText.text = IP;
+//		IPText.text = IP;
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		Input.gyro.enabled = true;
 		Input.gyro.updateInterval = 0.01F;
@@ -52,6 +53,8 @@ public class NetworkMngr : MonoBehaviour {
 	}   
 	// Create a server and listen on a port
 	public void SetupServer(){
+		discovery.Initialize ();
+		discovery.StartAsServer ();
 		NetworkServer.Listen(int.Parse(PORT));
 		NetworkServer.RegisterHandler(fromClient, onGyroMessage);
 		isAtStartup = false;
