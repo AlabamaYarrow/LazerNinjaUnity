@@ -16,7 +16,6 @@ public class MyClient : MonoBehaviour {
 		myClient.RegisterHandler(MsgType.Connect, OnConnected);     
 		myClient.RegisterHandler (NetworkMngr.toClient, OnGyro);
 		myClient.Connect(NetworkMngr.IP, int.Parse(NetworkMngr.PORT));
-		DontDestroyOnLoad (gameObject);
 	}
 	
 	// Update is called once per frame
@@ -28,6 +27,11 @@ public class MyClient : MonoBehaviour {
 //		Debug.Log (msg);
 	}
 
+	public void OnDestroy(){
+		if (myClient != null) {
+			myClient.Disconnect ();
+		}
+	}
 	private void OnGyro(NetworkMessage netMsg) {
 		var msg = netMsg.ReadMessage<NetworkMngr.GyroPosition>();
 
