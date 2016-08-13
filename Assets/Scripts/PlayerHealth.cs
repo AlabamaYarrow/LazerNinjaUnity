@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour {
 	GameObject GameoverTextLeft;
 	GameObject GameoverTextRight;
 
-	void Start () {
+	void Start () {		
+		Debug.Log (ApplicationModel.CurrentDifficultyLevel);
 		health = 100;
 		GameoverTextLeft = GameObject.Find("GameOverTextLeft");
 

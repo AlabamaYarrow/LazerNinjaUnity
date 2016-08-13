@@ -2,9 +2,13 @@
 using System.Collections;
 
 public class RadialCutoutMenu : MonoBehaviour {
-	
+
+	public ApplicationModel.DiffictultyLevel DifficultyLevel;
+	public AudioSource SelectSound;
+	public Light MenuItemLamp;
+
 	// How long to look at Menu Item before taking action
-	public float timerDuration = 2f;
+	public float timerDuration = 3f;
 	
 	// This value will count down from the duration
 	private float lookTimer = 0f;
@@ -20,6 +24,7 @@ public class RadialCutoutMenu : MonoBehaviour {
 	
 	// MonoBehaviour Start
 	void Start() {
+		MenuItemLamp.enabled = false;		
 		// My Collider
 		myCollider = GetComponent<BoxCollider>();
 		// Get my Renderer
@@ -32,42 +37,44 @@ public class RadialCutoutMenu : MonoBehaviour {
 	void Update() {
 		// While player is looking at me
 		if (isLookedAt) {
-			// Reduce Timer
 			lookTimer += Time.deltaTime;
 			
-			// Set cutoff value on material to value between 0 and 1
 			myRenderer.material.SetFloat("_Cutoff", lookTimer / timerDuration);
 			
 			if (lookTimer > timerDuration) {
-				// Reset timer
 				lookTimer = 0f;
-				
-				// disable collider
 				myCollider.enabled = false;
 				
-				// Do something
-				Debug.Log("BUTTON HAS BEEN SELECTED!");
+				ApplicationModel.CurrentDifficultyLevel = DifficultyLevel;
 				Application.LoadLevel (1);
 				
 				// Disappear
 				//gameObject.SetActive(false);
 			}    
-		}  else {
-			// Reset Timer
+		}  else {			
 			lookTimer = 0f;
-			// Reset Cutoff
 			myRenderer.material.SetFloat("_Cutoff", 0f);
 		}
 	}
+		
+	public void callLog() 
+	{		
+		if (! isLookedAt) {
+			isLookedAt = true;
+			MenuItemLamp.enabled = true;
+			if (SelectSound) {
+				SelectSound.Play ();		
+			}
 
-	public void callLog(){
-		Debug.Log("BUTTON HAS BEEN SELECTED!");
-		Application.LoadLevel (1);
+		} else {
+			MenuItemLamp.enabled = false;
+			isLookedAt = false;
+		}
 	}
 
 	// Google Cardboard Gaze
 	public void SetGazedAt(bool gazedAt) {
-		// Set the local bool to the one passed from Event Trigger
+		Debug.Log("Gazing.");
 		isLookedAt = gazedAt;
 	}
 }
