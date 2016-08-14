@@ -55,9 +55,9 @@ public class MyClient : MonoBehaviour {
 		//q.eulerAngles.y = msg.gyro.eulerAngles.z;
 		//q.eulerAngles.z = msg.gyro.eulerAngles.x;
 
-
-		transform.localRotation = q;//transQuat;//msg.gyro;//transQuat;
-		Debug.Log("X: " + transQuat.eulerAngles.x + " Y: " + transQuat.eulerAngles.y + " z: " + transQuat .eulerAngles.z);
+		transform.rotation = Quaternion.Slerp(transform.rotation, q, 0.15f);
+		//transform.localRotation = q;//transQuat;//msg.gyro;//transQuat;
+//		Debug.Log("X: " + transQuat.eulerAngles.x + " Y: " + transQuat.eulerAngles.y + " z: " + transQuat .eulerAngles.z);
 	}
 
 	public void OnConnected(NetworkMessage netMsg)
