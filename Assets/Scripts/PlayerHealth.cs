@@ -7,35 +7,45 @@ public class PlayerHealth : MonoBehaviour {
 	public Slider HealthBar;
 	public Text HealthText;
 	public Text TimerText;
+	public Text GameoverText;
+	public AudioSource GameOverSound;
+	public Text VictoryText;
+	public AudioSource VictorySound;
 	public int decreaseSpeed = 1;
 	public int GameOverDelay = 2;
 
 	private float time;
+	private bool finishing = false;
 	private Color TimerEndColor;
+	private float VictoryTimeoutMins;
 
 	private bool TimerCountAllowed = true;
 
-	GameObject GameoverTextLeft;
-	GameObject GameoverTextRight;
-
 	void Start () {		
-		Debug.Log (ApplicationModel.CurrentDifficultyLevel);
-		health = 100;
-		GameoverTextLeft = GameObject.Find("GameOverTextLeft");
-
+		// Debug.Log (ApplicationModel.CurrentDifficultyLevel);
 		TimerEndColor = new Color(0.9f, 0.625f, 0f, 1f);
-//		Color.TryParseHexString("#E8A000FF", out TimerEndColor);
+		GameoverText.enabled = false;
+		VictoryText.enabled = false;
 
+		health = 100;
+		ApplicationModel.ShootingAllowed = true;
+		VictoryTimeoutMins = (float)ApplicationModel.CurrentDifficultyLevel + 1;
+
+		StartCoroutine("WaitForVictory");
 	}
 
 	void Update () {
 		if (TimerCountAllowed) {
 			time += Time.deltaTime;
-		
-			var seconds = (int)time;
+
+			int minutes = (int)(time / 60);
+			float seconds = (int)time % 60;
 			var fraction = time - (int)time;
-		
-			TimerText.text = string.Format ("{0} sec", time.ToString ("0.000"));
+			seconds += fraction;
+
+						
+			// TimerText.text = string.Format ("{0} m {1} sec {2}", minutes, seconds, fraction.ToString("0.000"));
+			TimerText.text = string.Format ("{0} m {1} s", minutes, seconds.ToString("0.00"));
 		}
 	}
 
@@ -46,20 +56,42 @@ public class PlayerHealth : MonoBehaviour {
 
 	IEnumerator WaitAndLoadLevel() {		
 		yield return new WaitForSeconds (GameOverDelay);
-		Debug.Log ("Waited.");
+		finishing = false;
 		Application.LoadLevel (2);
+	}
+
+	IEnumerator WaitForVictory() {
+		float WaitTime = 60 * VictoryTimeoutMins;
+		yield return new WaitForSeconds (WaitTime);
+		finishing = true;
+		ApplicationModel.ShootingAllowed = false;
+		VictoryText.enabled = true;
+		VictoryText.GetComponent<CanvasRenderer>().SetAlpha (0);
+		VictoryText.CrossFadeAlpha (1, 1f, false);
+
+		if (VictorySound != null) {
+			VictorySound.Play ();
+		}
+		StartCoroutine("WaitAndLoadLevel");
 	}
 
 	public void DecreaseHealth() 
 	{
-		if (health <= 0) {
-			var gameoverText = GameoverTextLeft.GetComponent<GameoverText> ();
-			gameoverText.Appear ();
-
+		if (health <= 0 && ! finishing) {		
+			finishing = true;
+			ApplicationModel.ShootingAllowed = false;
 			health = 0;
 			SetHealth ();
 			TimerCountAllowed = false;
 			TimerText.color = TimerEndColor;
+
+			GameoverText.enabled = true;
+			GameoverText.GetComponent<CanvasRenderer>().SetAlpha (0);
+			GameoverText.CrossFadeAlpha (1, 1f, false);
+
+			if (GameOverSound != null) {
+				GameOverSound.Play ();
+			}
 			StartCoroutine("WaitAndLoadLevel");
 		} else {
 			SetHealth ();

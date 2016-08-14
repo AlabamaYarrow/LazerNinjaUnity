@@ -17,7 +17,7 @@ public class Shoot : MonoBehaviour {
 
 	public float StartDelay;
 
-	private float delay = 6.0f; 
+	private float delay = 4.0f; 
 
 
 
@@ -29,14 +29,18 @@ public class Shoot : MonoBehaviour {
 	}
 
 	void DecreaseRate() {
-		repeatRate -= RateDecreaseSpeed;
+		if (repeatRate > 0.3f) { 
+			repeatRate -= RateDecreaseSpeed;
+		}
 	}
 
 	IEnumerator WaitAndStartShooting() {
 		yield return new WaitForSeconds (StartDelay);
 		while (true) {
 			yield return new WaitForSeconds (repeatRate);
-			ShootBullet();
+			if (ApplicationModel.ShootingAllowed) {
+				ShootBullet();
+			}
 		}
 	}
 
@@ -61,19 +65,10 @@ public class Shoot : MonoBehaviour {
 		                                   Random.Range (-0.15f, 0.15f));
 
 		zero += fluctuation;
-
-		//Debug.Log ("Zero" + zero.ToString ());
-		//Debug.Log ("Position" + position.ToString());
 		direction = zero - position;
-		//Debug.Log ("Direction" + direction.ToString());
-
 		direction = direction.normalized;
-		//Debug.Log ("Normalized" + direction.ToString());
-
 		instanceBullet.GetComponent<Rigidbody> ().AddForce (direction * ShootForce);
 		ShootSound.Play ();
-
 		Object.Destroy(instanceBullet, delay);
-
 	}	
 }

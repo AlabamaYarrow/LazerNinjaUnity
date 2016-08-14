@@ -8,12 +8,9 @@ public class GameoverText : MonoBehaviour {
 
 	private Color TextColor;
 
-	// Use this for initialization
 	void Start () {
 		text.color = Color.clear;
 		TextColor = new Color();
-//		ColorUnity.TryParseHexString("#C2C2C2FF", out TextColor);
-//		Color.TryParseHexString("#C2C2C2FF", out TextColor);
 	}
 	
 	// Update is called once per frame

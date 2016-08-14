@@ -9,9 +9,6 @@ public class OnStartScreen : MonoBehaviour {
 		NetworkMngr.IP = IP.text;
 		Application.LoadLevel (2);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+	void Update () { }
 }
