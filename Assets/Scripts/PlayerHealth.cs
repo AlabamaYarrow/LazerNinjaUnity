@@ -102,7 +102,7 @@ public class PlayerHealth : MonoBehaviour {
 				GameOverSound.Play ();
 			}
 			StartCoroutine("WaitAndLoadLevel");
-		} else {
+		} else if (!finishing) {
 			SetHealth ();
 			health -= decreaseSpeed;
 		}
