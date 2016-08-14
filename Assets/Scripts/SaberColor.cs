@@ -16,6 +16,9 @@ public class SaberColor : MonoBehaviour {
 			case ApplicationModel.DiffictultyLevel.HARD:
 				line.LineColor = Color.magenta;
 				break;
+			case ApplicationModel.DiffictultyLevel.TURBO:
+				line.LineColor = Color.red;
+				break;
 		}
 
 	}

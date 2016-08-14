@@ -29,7 +29,15 @@ public class PlayerHealth : MonoBehaviour {
 
 		health = 100;
 		ApplicationModel.ShootingAllowed = true;
-		VictoryTimeoutMins = (float)ApplicationModel.CurrentDifficultyLevel + 1;
+
+		if (ApplicationModel.CurrentDifficultyLevel ==
+			ApplicationModel.DiffictultyLevel.TURBO) {
+			VictoryTimeoutMins = 0.33f;
+		} else {
+			VictoryTimeoutMins = (float)ApplicationModel.CurrentDifficultyLevel + 1;
+		}
+
+
 
 		StartCoroutine("WaitForVictory");
 	}
@@ -56,23 +64,24 @@ public class PlayerHealth : MonoBehaviour {
 
 	IEnumerator WaitAndLoadLevel() {		
 		yield return new WaitForSeconds (GameOverDelay);
-		finishing = false;
 		Application.LoadLevel (2);
 	}
 
-	IEnumerator WaitForVictory() {
+	IEnumerator WaitForVictory() {		
 		float WaitTime = 60 * VictoryTimeoutMins;
 		yield return new WaitForSeconds (WaitTime);
-		finishing = true;
-		ApplicationModel.ShootingAllowed = false;
-		VictoryText.enabled = true;
-		VictoryText.GetComponent<CanvasRenderer>().SetAlpha (0);
-		VictoryText.CrossFadeAlpha (1, 1f, false);
+		if (!finishing) {			
+			finishing = true;
+			ApplicationModel.ShootingAllowed = false;
+			VictoryText.enabled = true;
+			VictoryText.GetComponent<CanvasRenderer> ().SetAlpha (0);
+			VictoryText.CrossFadeAlpha (1, 1f, false);
 
-		if (VictorySound != null) {
-			VictorySound.Play ();
+			if (VictorySound != null) {
+				VictorySound.Play ();
+			}
+			StartCoroutine ("WaitAndLoadLevel");
 		}
-		StartCoroutine("WaitAndLoadLevel");
 	}
 
 	public void DecreaseHealth() 

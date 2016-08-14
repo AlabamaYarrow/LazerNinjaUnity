@@ -23,7 +23,12 @@ public class Shoot : MonoBehaviour {
 
 	void Start () {
 		StartCoroutine ("WaitAndStartShooting");
-		InvokeRepeating ("DecreaseRate", 1, 1);
+		if (ApplicationModel.CurrentDifficultyLevel ==
+		    ApplicationModel.DiffictultyLevel.TURBO) {
+			repeatRate = 0.2f;
+		} else {
+			InvokeRepeating ("DecreaseRate", 1, 1);
+		}
 		//Debug.Log("Started!");
 
 	}
