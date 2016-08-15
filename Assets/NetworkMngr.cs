@@ -22,7 +22,7 @@ public class NetworkMngr : MonoBehaviour {
 	public bool isAtStartup = true;
 
 	void Start () {
-//		IPText.text = IP;
+		IPText.text = IP;
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		Input.gyro.enabled = true;
 		Input.gyro.updateInterval = 0.01F;
